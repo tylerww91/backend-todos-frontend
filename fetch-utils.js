@@ -81,3 +81,20 @@ export async function createTodo(description) {
         console.error(data.message);
     }
 }
+
+export async function fetchTodos() {
+    const resp = await fetch(`${BASE_URL}/api/v1/todos`, {
+        method: 'GET',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+        },
+        credentials: 'include',
+    });
+    const data = await resp.json();
+    if (resp.ok) {
+        return data;
+    } else {
+        console.error(data.message);
+    }
+}
