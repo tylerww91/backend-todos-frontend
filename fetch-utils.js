@@ -29,7 +29,8 @@ export async function signUpUser(email, password) {
     });
     const data = await resp.json();
     if (resp.ok) {
-        location.replace('/');
+        // location.replace('/');
+        await signInUser(email, password);
     } else {
         console.error(data.message);
     }
@@ -44,9 +45,11 @@ export async function signInUser(email, password) {
         },
         body: JSON.stringify({ email, password }),
         credentials: 'include',
+        mode: 'cors',
     });
     const data = await resp.json();
     if (resp.ok) {
+        console.log('it was okay');
         location.replace('/');
     } else {
         console.error(data.message);
@@ -89,6 +92,25 @@ export async function fetchTodos() {
             Accept: 'application/json',
             'Content-Type': 'application/json',
         },
+        credentials: 'include',
+    });
+    const data = await resp.json();
+    if (resp.ok) {
+        return data;
+    } else {
+        console.error(data.message);
+    }
+}
+
+export async function checkOffTodo(todoId, todoCompleted) {
+    // console.log(todo);
+    const resp = await fetch(`${BASE_URL}/api/v1/todos/${todoId}`, {
+        method: 'PUT',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ completed: !todoCompleted }),
         credentials: 'include',
     });
     const data = await resp.json();

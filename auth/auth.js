@@ -7,7 +7,7 @@ import { getUser, signInUser, signUpUser } from '../fetch-utils.js';
 
 async function loadUser() {
     const user = await getUser();
-    // console.log(user);
+    console.log(user);
     if (user) location.replace('/');
 }
 
@@ -26,6 +26,7 @@ let isSignIn = true;
 /* Events */
 
 window.addEventListener('load', () => {
+    // loadUser();
     displayAuth();
 });
 
