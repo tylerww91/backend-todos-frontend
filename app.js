@@ -2,7 +2,7 @@
 // this will check if we have a user and set signout link if it exists
 import './auth/user.js';
 import { checkOffTodo, createTodo, fetchTodos } from './fetch-utils.js';
-
+// for netlify commit
 /* Get DOM Elements */
 
 const todosForm = document.getElementById('todos-form');
