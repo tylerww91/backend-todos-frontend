@@ -69,3 +69,11 @@ main {
 .hidden {
     display: none;
 }
+
+.completed {
+    text-decoration-line: line-through;
+}
+
+.delete-button {
+    color: darkred;
+}

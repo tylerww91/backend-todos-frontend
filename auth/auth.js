@@ -4,8 +4,14 @@ import { getUser, signInUser, signUpUser } from '../fetch-utils.js';
 // If on this /auth page but we have a user, it means
 // user probably navigated here by the url.
 // Send them back to home page (they need to sign out first!)
-const user = getUser();
-if (user) location.replace('/');
+
+async function loadUser() {
+    const user = await getUser();
+    console.log(user);
+    if (user) location.replace('/');
+}
+
+loadUser();
 
 /* Get DOM (getElementById and friends)*/
 const authForm = document.getElementById('auth-form');
@@ -20,6 +26,7 @@ let isSignIn = true;
 /* Events */
 
 window.addEventListener('load', () => {
+    // loadUser();
     displayAuth();
 });
 
@@ -52,8 +59,13 @@ authForm.addEventListener('submit', async (e) => {
         response = await signInUser(formData.get('email'), formData.get('password'));
     } else {
         response = await signUpUser(formData.get('email'), formData.get('password'));
+        // if (response) {
+        //     response = await signInUser(formData.get('email'), formData.get('password'));
+        // } else {
+        //     return;
+        // }
+        // console.log('response', response);
     }
-
     const error = response.error;
 
     if (error) {
