@@ -73,3 +73,7 @@ main {
 .completed {
     text-decoration-line: line-through;
 }
+
+.delete-button {
+    color: darkred;
+}

@@ -1,7 +1,7 @@
 /* Imports */
 // this will check if we have a user and set signout link if it exists
 import './auth/user.js';
-import { checkOffTodo, createTodo, fetchTodos } from './fetch-utils.js';
+import { checkOffTodo, createTodo, fetchTodos, deleteTodo } from './fetch-utils.js';
 // for netlify commit
 /* Get DOM Elements */
 
@@ -11,7 +11,6 @@ const todosList = document.getElementById('todos-list');
 
 /* State */
 let error = null;
-let todos = [];
 /* Events */
 
 window.addEventListener('load', () => {
@@ -54,6 +53,16 @@ async function displayTodos() {
         div.addEventListener('click', async () => {
             console.log('todo!', todo);
             await checkOffTodo(todo.id, todo.completed);
+            await displayTodos();
+        });
+
+        const button = document.createElement('button');
+        button.textContent = '-';
+        button.classList.add('delete-button');
+        todosList.append(button);
+
+        button.addEventListener('click', async () => {
+            await deleteTodo(todo.id);
             await displayTodos();
         });
     }

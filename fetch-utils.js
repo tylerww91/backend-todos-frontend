@@ -120,3 +120,20 @@ export async function checkOffTodo(todoId, todoCompleted) {
         console.error(data.message);
     }
 }
+
+export async function deleteTodo(id) {
+    const resp = await fetch(`${BASE_URL}/api/v1/todos/${id}`, {
+        method: 'DELETE',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json,',
+        },
+        credentials: 'include',
+    });
+    const data = await resp.json();
+    if (resp.ok) {
+        return data;
+    } else {
+        console.error(data.message);
+    }
+}
